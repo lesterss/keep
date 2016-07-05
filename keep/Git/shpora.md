@@ -27,7 +27,9 @@ Git — система контроля версий (файлов). Что-то
 git update-index --assume-unchanged .
 
 Пример:
+``` bash
 git update-index --assume-unchanged application/config/database.php
+```
 
 Чтобы перестать игнорировать изменения нужно использовать параметр --no-assume-unchanged .
 
