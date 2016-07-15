@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+</head>
+<style type="text/css">
+body,html {
+  margin: 0;
+  padding: 0;
+}
+  #text {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    -webkit-flex-flow: row wrap;
+    display: flex;
+  }
+  .right,.left {
+    padding: 0;
+    margin: 0;
+    list-style: none;  
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;  
+    -webkit-flex-flow: row wrap;
+    justify-content: space-around;
+  }
+  .right > div,.left > div {
+    background: tomato;
+    padding: 5px;
+    width: 200px;
+    height: 150px;
+    margin-top: 10px;  
+    line-height: 150px;
+    color: white;
+    font-weight: bold;
+    font-size: 3em;
+    text-align: center;
+  }
+
+  .right{
+    width: 69%;
+    position: relative;
+  }
+  .left{
+    width: 30%;
+    border: 1px solid #ccc;
+    margin-top: 10px; 
+  }
+  .loadnew {
+    position: absolute;
+    bottom: -50px;
+    left: 46%;
+  }
+  .load {
+    margin: 25px;
+  }
+</style>
+<body>
+
+  <button onclick="loadPhones()" class=".load">Загрузить json!</button>
+<div id="text">
+  <div class="right"><button class="loadnew">Еще</button></div>
+  <div class="left"></div>
+</div>
+  <script>
+    function loadPhones() {
+      var xhr = new XMLHttpRequest();
+      var getUrl = new XMLHttpRequest();
+
+      xhr.open('GET', 'http://pokeapi.co/api/v1/pokemon/?limit=12', false);
+      xhr.send();
+
+      var baseUrl = "http://pokeapi.co";
+      var div = document.getElementById("text");
+      var rightBar = div.querySelector('.right');
+      var leftBar = div.querySelector('.left');
+      var item = "";
+      var urlImg = "";
+      var id = "";
+      var img = "";
+      var imgText = "";
+      var k = 1;
+
+      if (xhr.status != 200) {
+        alert('Ошибка ' + xhr.status + ': ' + xhr.statusText);
+      } else {
+        var text = xhr.responseText;
+        var element = JSON.parse(text);
+        var object = element.objects;
+        var leng = element.objects.length;
+        for (var i=0; i < leng; i++) {
+          item = object[i];
+          url = item.sprites[0];
+          id = item.pkdx_id;          
+          rightBar.innerHTML = rightBar.innerHTML + "<div class='col" + k++ + "'></div>";
+          if(url.resource_uri){
+            getUrl.open('GET', 'http://pokeapi.co/' + url.resource_uri, false);
+            getUrl.send();
+             if (getUrl.status != 200) {
+                alert('Ошибка ' + getUrl.status + ': ' + getUrl.statusText);
+              } else {
+                 imgText = JSON.parse(getUrl.responseText);
+                 urlImg = imgText.image;
+                // console.log(imgText.image);
+              }
+          }
+          img = "<img src='" + baseUrl + imgText.image + "' />";
+          rightBar.querySelector(".col"+k);
+           //rightBar.innerHTML = img;
+           var col = ".col"+(k-1);
+          rightBar.querySelector(col).innerHTML = img;
+          
+          //console.log(url.resource_uri);
+
+          }
+
+      }
+    }
+  </script>
+
+</body>
+
+</html>

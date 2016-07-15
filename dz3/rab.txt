@@ -1,0 +1,76 @@
+/**
+ * Created by vor on 14.10.2014.
+ */
+window.onload = function () {
+    var button = document.querySelector('.selector-find');
+    var count = 0;
+    button.addEventListener("click", function (event) {
+        var value_input = document.querySelector('.jsbursa-panel input.selector').value;
+        //console.log(value_input);
+        //if(count++ > 0) {return false;}
+       // if(value_input == value_input && count++ > 0) {alert ('da');return false;}
+        //var value_input = [].slice.call(document.querySelectorAll('.jsbursa-panel input.selector'));
+        if (value_input.length == '') {
+            alert('Запрос не может быть пустым');
+            //event.preventDefault();
+        } else {
+            var result = document.querySelectorAll('.page-wrapper ' + value_input);
+            if (result.length == 0) {
+                alert('Данный селектор не найден или введен с ошибкой.');
+            }
+            var item = result[0];
+
+            function checkcls() {
+                if (document.querySelector('.alert')) {
+                    document.querySelector('.alert').classList.remove('alert');
+
+                }
+            };
+            checkcls();
+            item.classList.add('alert');
+            if (result.length > 1) {
+                //console.log(result);
+                var snext = document.querySelector('.selector-next');
+                var sprev = document.querySelector('.selector-prev');
+                if (snext.hasAttribute('disabled')) {
+                    snext.removeAttribute('disabled');
+                    sprev.removeAttribute('disabled');
+                }
+                var n = 1;
+                snext.addEventListener('click', function () {
+                    // var keys = Object.keys(result);
+                    //alert(keys[f++]);
+                    /*for (var key in result) {
+                        //alert(key+':'+result[key]);
+
+                    }*/
+                    if(result.length > 0) {
+                        var sclass = result[n++];
+                       // console.log(sclass);
+                        sclass.classList.add('alert');
+                    }
+                    checkcls();
+                    if(n === result.length){
+                        snext.setAttribute('disabled', 'disabled');
+                    }
+                });
+               var p = result.length;
+                sprev.addEventListener('click', function () {
+                    console.log(result[p--]);
+                    if(result.length > 0) {
+                        var pclass = result[p--];
+                        // console.log(sclass);
+                       // pclass.classList.add('alert');
+                    }
+                    checkcls();
+                    if(p === result.length){
+                        snext.setAttribute('disabled', 'disabled');
+                    }
+                });
+            } else {
+                var sall = document.querySelector('.selector-next, .selector-prev');
+                sall.setAttribute('disabled', 'disabled');
+            }
+        }
+    });
+}

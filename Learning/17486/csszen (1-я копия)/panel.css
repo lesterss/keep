@@ -1,0 +1,10 @@
+.jsbursa-panel {
+    z-index: 1000;
+    position: fixed;
+    right: 25px;
+    top: 25px;
+    width: 300px;
+    border: solid red 2px;
+    background-color: white;
+    padding: 10px;
+}

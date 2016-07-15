@@ -1,0 +1,176 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+</head>
+<style type="text/css">
+  body, html {
+    margin: 0;
+    padding: 0;
+  }
+  #text {
+    position: relative;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    -webkit-flex-flow: row wrap;
+    display: flex;
+    width: 960px;
+    margin: 0 auto;
+  }
+  .right, .left {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    justify-content: space-around;
+  }
+  .right > div, .left > div {
+    background: tomato;
+    padding: 5px;
+    width: 200px;
+    height: 150px;
+    margin-top: 10px;
+    line-height: 150px;
+    color: white;
+    font-weight: bold;
+    font-size: 3em;
+    text-align: center;
+  }
+  .right > div img:hover {
+    cursor: pointer;
+  }
+  .right {
+    width: 69%;
+  }
+  .left {
+    width: 30%;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+  }
+  #loadnew {
+    position: absolute;
+    bottom: -50px;
+    left: 46%;
+  }
+  .load {
+    margin: 25px;
+  }
+</style>
+<body>
+
+<button onclick="loadPhones()" class="load">Загрузить json!</button>
+<button onclick="history.go(0)">Обновить пейджу</button>
+<div id="text">
+  <div class="right"></div>
+  <button id="loadnew" disabled="disabled">Еще</button>
+  <div class="left"></div>
+</div>
+<script>
+  var baseUrl = "http://pokeapi.co";
+  var div = document.getElementById("text");
+  var rightBar = div.querySelector('.right');
+  var buttonLoad = document.querySelector('.load');
+  var leftBar = div.querySelector('.left');
+  var item = "";
+  var urlImg = "";
+  var id = "";
+  var img = "";
+  var imgText = "";
+  var k = 1;
+  var next = "";
+  var col = "";
+  var buttonLoadnew = document.getElementById('loadnew');
+
+  buttonLoadnew.addEventListener("click", getMore);
+
+  function getMore() {
+    console.log('start');
+    var getUrldata = buttonLoad.getAttribute("data-url");
+    loadPhones(getUrldata);
+  }
+
+  function getInfoStart() {
+    var clickImg = div.querySelectorAll('.right > div > img');
+    for (var q = 0; q < clickImg.length; q++) {
+      clickImg[q].addEventListener("click", function (event) {
+
+      });
+    }
+    console.log('getInfo');
+  }
+
+  function loadPhones(itemUrl) {
+
+    var xhr = new XMLHttpRequest();
+    if (itemUrl === undefined) {
+      itemUrl = 'api/v1/pokemon/?limit=3';
+    }
+    xhr.open('GET', 'http://pokeapi.co/' + itemUrl, true);
+    xhr.send();
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState != 4) return;
+      buttonLoad.innerHTML = 'Готово!';
+      buttonLoadnew.innerHTML = 'Еще нннадо!';
+      buttonLoadnew.disabled = false;
+      if (xhr.status != 200) {
+        alert('Ошибка ' + xhr.status + ': ' + xhr.statusText);
+      } else {
+        //buttonLoad.setAttribute("disabled", "disabled");
+        var text = xhr.responseText;
+        var element = JSON.parse(text);
+        var object = element.objects;
+        next = element.meta.next;
+        var leng = element.objects.length;
+        //console.log(next);
+        buttonLoad.setAttribute("data-url", next);
+        for (var i = 0; i < leng; i++) {
+          item = object[i];
+          url = item.sprites[0];
+          urlImg = item.sprites[0].resource_uri;
+          id = item.pkdx_id;
+          //console.log(urlImg);
+          urlImg = getImgUrl(urlImg);
+          rightBar.innerHTML = rightBar.innerHTML + "<div class='col" + k++ + "'></div>";
+          //была картинка урл
+          //console.log(urlImg + "   img");
+          img = "<img src='" + baseUrl + urlImg + "' />";
+          rightBar.querySelector(".col" + k);
+          //rightBar.innerHTML = img;
+          col = ".col" + (k - 1);
+          rightBar.querySelector(col).innerHTML = img;
+          //console.log(url.resource_uri);
+        }
+        getInfoStart();
+      }    //return next;
+    };
+
+    buttonLoad.innerHTML = 'Загружаю...';
+    buttonLoad.disabled = true;
+  }
+  function getImgUrl(url) {
+    // console.log(url);
+    var getUrl = new XMLHttpRequest();
+    getUrl.open('GET', 'http://pokeapi.co/' + url, false);
+    getUrl.send();
+    if (getUrl.status != 200) {
+      alert('Ошибка ' + getUrl.status + ': ' + getUrl.statusText);
+    } else {
+      imgText = JSON.parse(getUrl.responseText);
+      urlImg = imgText.image;
+      return urlImg;
+    }
+
+  }
+</script>
+
+</body>
+
+</html>
