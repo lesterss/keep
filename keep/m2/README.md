@@ -1,5 +1,7 @@
-##Шпаргалка команд Magento2
+#Шпаргалка команд Magento2
 
 
-#Реиндекс
+###Реиндекс
+``` bash
 php bin/magento indexer:reindex
+```
