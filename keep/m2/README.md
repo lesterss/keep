@@ -26,3 +26,10 @@ php bin/magento indexer:reindex
 ```bash
 php bin\magento indexer:reindex indexer_name.
 ```
+###Кеш
+
+
+Очистка всего
+```bash
+php bin/magento cache:clean
+```
