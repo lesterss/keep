@@ -1,5 +1,5 @@
 # Шпаргалка команд Magento2
-* [create an anchor](#anchors-in-markdown)
+* [ccc](#ccc)
 
 ### Реиндекс
 Список всех возможных реиндексов 
@@ -26,9 +26,10 @@ php bin/magento indexer:reindex
 ```bash
 php bin\magento indexer:reindex indexer_name.
 ```
-### Кеш(#anchors-in-markdown)
+### Кеш
 Очистка всего
 ```bash
 php bin/magento cache:clean
 ```
 ### Стили
+(#ccc)
