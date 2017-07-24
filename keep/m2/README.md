@@ -32,4 +32,26 @@ php bin\magento indexer:reindex indexer_name.
 php bin/magento cache:clean
 ```
 ### Стили
-(#ccc)
+[Дока мадженты](http://devdocs.magento.com/guides/v2.0/frontend-dev-guide/css-guide/css_quick_guide_approach.html#simple_extend)
+```bash
+_extend.less # используется для добавление незначительных правок стилей темы.
+```
+**Пример**
+ * подключаем свой стиль компонента батон @import '_buttons_extend.less' в _extend.less, который лежит там же в папке source
+   - он расширит родительский _buttons.less
+ * Если создать сразу в source _buttons.less то он уже перезапишет родительский _buttons.less.(Если оставить пустмы, стилей не будет)
+```bash 
+_module.less # используется для добавление существенных стилей в модуль .
+_theme.less # для написаний стилей своей темы (ниже путь, в него надо копировать все из родительского _theme.less, даже те которые не будут использоваться)- минус нужно вручную апдейтить этот файл, если обновляется родительский.
+```
+
+**Но правильно, если нужно перезаписать/расширить стили создавать .less для каждого компонента библиотеки Magento UI, который вы измените.**
+
+```html
+<theme_dir>/
+│  ├── web/
+│  │   ├── css/
+│  │   │   ├── source/
+│  │   │      ├──_theme.less
+...
+```
