@@ -3,6 +3,7 @@
 * [Структура темы](#Структура-новой-темы)
 * [Less](#less)
 * [Фишки](#ФИШКИ)
+* [Команды](#Команды)
 
 ### Реиндекс
 Список всех возможных реиндексов 
@@ -265,3 +266,34 @@ _theme  ----- Если переменные являются общими для
 > bin/magento deploy:mode:set production
 
 > bin/magento deploy:mode:set default   - если никакой другой не установлен
+
+## Команды
+
+```php
+magento --list ->  список команд
+
+magento setup:upgrade    ->  Если вкл/выкл модули, нужно апдейтить жанные в базе
+
+magento module:status -> статус модулей
+
+magento module:disable Magento_Weee  -> Выключение модуля
+
+magento module:enable [-c|--clear-static-content] [-f|--force] [--all] <module-list> --- Полная строка вкл модуля.
+
+   - <module-list> -> список модулей через пробел.
+   - --all -> Для включения или отключения всех модулей одновременно.
+   -  -f|--force -> Чтобы включить или отключить модуль, несмотря на зависимости.
+   - -c|--clear-static-content -> Удаляет статик файлы.
+```
+### Режим обслуживание (красная подсветка)
+
+Если есть этот файл var/.maintenance.flag значит режим вкл.
+var/.maintenance.ip - содержит ип кому виден режим.
+
+```php
+magento maintenance:status
+magento maintenance:enable [--ip=<ip address>] -> можно несколько ип через пробел. Или если для всех ип тогда --ip=none.
+
+Если юзать команду --ip=<ip address> с выключеным ред-режимом, он сохранит ип для следующего включения режима.
+maintenance:enable --ip=none    ->  очистит список ип.
+```
