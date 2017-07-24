@@ -57,7 +57,7 @@ _extend.less # используется для добавление незнач
 _module.less # используется для добавление существенных стилей в модуль .
 _theme.less # для написаний стилей своей темы (ниже путь, в него надо копировать все из родительского _theme.less, даже те которые не будут использоваться)- минус нужно вручную апдейтить этот файл, если обновляется родительский.
 styles-m.less # Для basic and mobile-specific styles (Global lib + theme styles + theme extends)
-styles-l.less # Desktop enhancements (768 и выше) ( Global lib + theme styles)
+styles-l.less # Desktop enhancements (768 и выше) ( Global lib + theme styles) как дополнение к мобильным
 ```
 
 **Но правильно, если нужно перезаписать/расширить стили создавать .less для каждого компонента библиотеки Magento UI, который вы измените.**
@@ -240,3 +240,20 @@ app/design/frontend/Singree/walkbeyond/
     </page>
     
 ```
+
+**В styles-m.less вы увидите пару прокомментированных строк:**
+
+> //@magento_import 'source/_module.less';   и тд
+
+На самом деле они не закоментированы, мадженто хитро обрабатывает строки **//@magento_import**
+
+**Эти строки могут быть подключены только в файлы в <theme-dir>/web/css**
+
+
+### Разница между _variables.less и _theme.less
+
+[Здесь внизу](https://github.com/magento/magento2/blob/2.0/lib/web/css/docs/source/README.md)
+
+_variables  ---- Если переменные являются общими для тем они должны быть расположены в глобальной библиотеке в файле _variables.less
+
+_theme  ----- Если переменные являются общими для модулей.
