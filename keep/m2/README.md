@@ -125,3 +125,97 @@ app/design/frontend/Singree/walkbeyond/
 * Обязательным для темы является файл etc/view.xml (если он не определен в родительской теме)
   - который содержит значения свойств для изображений товаров, таких как высота, ширина, прозрачность, цвет фона и т.п.
   - Этот файл необходимо полностью скопировать с базовой темы (значения не наследуются).
+
+### Использование макетов в теме
+
+> В Magento 2 в определенной теме можно как расширять, так и переопределять макеты.
+
+Например, чтобы расширить макет catalog_category_view модуля Catalog, который находится по пути (сatalog_module_dir)/view/frontend/layout/catalog_category_view.xml, необходимо создать файл по пути: (theme_dir)/Magento_Catalog/layout/catalog_category_view.xml
+
+**Удалить какой-либо блок**
+
+```xml
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"        xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="category.description" remove="true"/>
+    </body>
+</page>
+```
+
+**Если количество изменений крайне велико, лучше переопределить ОСНОВНОЙ БАЗОВЫЙ макет. Путем создания папки override/base в папке модуля темы:**
+
+```html
+<theme_dir>
+  |__/<Namespace_Module>
+    |__/layout
+      |__/override
+         |__/base
+           |--<layout1>.xml
+           |--<layout2>.xml
+           
+```
+Эти файлы будут переопределять макеты:
+
+```html
+<module_dir>/view/frontend/layout/<layout1>.xml
+
+<module_dir>/view/frontend/layout/<layout2>.xml
+```
+
+**Также можно переопределить макеты родительской ТЕМЫ, создав папку override/theme в папке модуля темы:**
+
+```html
+<theme_dir>
+  |__/<Namespace_Module>
+    |__/layout
+      |__/override
+         |__/theme
+            |__/<Parent_Vendor>
+               |__/<parent_theme>
+                  |--<layout1>.xml
+                  |--<layout2>.xml
+```
+Эти файлы будут переопределять макеты, которые находятся по таким путям:
+
+```html
+<parent_theme_dir>/<Namespace>_<Module>/layout/<layout1>.xml
+
+<parent_theme_dir>/<Namespace>_<Module>/layout/<layout2>.xml
+```
+
+### Локализация темы
+
+Словари с переводами ищутся в таких локациях:
+
+* <parent_theme_dir>/i18n/ (идет просмотр во всех родительских темах)
+* <current_theme_dir>/i18n/
+
+> Папка i18n может находиться в каждом модуле или глобально в папке app. Словари с папками темы имеют более высокий приоритет в поиске переведенной строки.
+
+Чтобы сгенерировать файл с переводами в папке темы можно использовать [i18n tool](http://devdocs.magento.com/guides/v2.0/config-guide/cli/config-cli-subcommands-i18n.html#config-cli-subcommands-xlate-dict).
+
+**Можно запустить такую команду в корневом каталоге magento 2:**
+
+`php bin/magento i18n:collect-phrases --output="app/design/frontend/(vendor)/(theme codename)/i18n/en_US.csv" app/design/frontend/(vendor)/(theme codename)`
+
+> Она соберет все строки в словарь. Далее файл словаря: app/design/frontend/(vendor)/(theme codename)/i18n/en_US.csv. Его можно открыть любым редактором таблиц и изменить перевод любых строк в правой колонке. Переведённые строки, вместо основных, можно будет увидеть после применения темы.
+
+
+### Удаление темы
+
+Если тема является Composer пакетом, ее можно удалить командой (с корневого каталога):
+
+`php bin/magento theme:uninstall [-c|--clear-static-content] {theme path} ... {theme path}`
+
+> {theme path} – относительный путь к теме, начиная с имя area (frontend). В нашем случае: frontend/Singree/walkbeyond.
+
+> --clear-static-content – удаляет статические файлы (для которых не нужна автоматическая генерация: css, js, images).
+
+В случае, если тема не является Сomposer пакетом, для ее удаления необходимо выполнить такие шаги:
+
+* Удалить папку темы app/design/frontend/(Vendor);
+* Удалить содержимое var/view_preprocessed;
+* Удалить содержимое of pub/static/frontend/;
+* Открыть базу данных мадженто 2, найти theme таблицу и удалить строку с названием темы;
+* Удалить кеш командой php bin/magento cache:flush.
