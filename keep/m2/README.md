@@ -69,7 +69,7 @@ _theme.less # для написаний стилей своей темы (ниж
 ```
 ### Less
 
-** Изменить тип компиляции можно в админ части по пути: Stores → Configuration → Advanced → Developer → Front-end development workflow → Workflow: **
+**Изменить тип компиляции можно в админ части по пути: Stores → Configuration → Advanced → Developer → Front-end development workflow → Workflow**
 
 > Типы препроцессинга LESS в Magento 2
 
