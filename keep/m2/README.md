@@ -2,6 +2,7 @@
 * [Стили](#Стили)
 * [Структура темы](#Структура-новой-темы)
 * [Less](#less)
+* [Фишки](#Фишки)
 
 ### Реиндекс
 Список всех возможных реиндексов 
@@ -55,6 +56,8 @@ _extend.less # используется для добавление незнач
 ```bash 
 _module.less # используется для добавление существенных стилей в модуль .
 _theme.less # для написаний стилей своей темы (ниже путь, в него надо копировать все из родительского _theme.less, даже те которые не будут использоваться)- минус нужно вручную апдейтить этот файл, если обновляется родительский.
+styles-m.less # Для basic and mobile-specific styles (Global lib + theme styles + theme extends)
+styles-l.less # Desktop enhancements (768 и выше) ( Global lib + theme styles)
 ```
 
 **Но правильно, если нужно перезаписать/расширить стили создавать .less для каждого компонента библиотеки Magento UI, который вы измените.**
@@ -201,7 +204,6 @@ app/design/frontend/Singree/walkbeyond/
 
 > Она соберет все строки в словарь. Далее файл словаря: app/design/frontend/(vendor)/(theme codename)/i18n/en_US.csv. Его можно открыть любым редактором таблиц и изменить перевод любых строк в правой колонке. Переведённые строки, вместо основных, можно будет увидеть после применения темы.
 
-
 ### Удаление темы
 
 Если тема является Composer пакетом, ее можно удалить командой (с корневого каталога):
@@ -219,3 +221,22 @@ app/design/frontend/Singree/walkbeyond/
 * Удалить содержимое of pub/static/frontend/;
 * Открыть базу данных мадженто 2, найти theme таблицу и удалить строку с названием темы;
 * Удалить кеш командой php bin/magento cache:flush.
+
+
+### ФИШКИ
+
+**Добавить новый CSS в начало всех ваших страниц шаблонов.**
+
+> Создать app/design/frontend/(vendor)/(theme codename)/Magento_Theme/layout/default_head_blocks.xml
+
+> И вносить правки в /web/css/myStyle.less
+
+```xml
+<?xml version="1.0"?>
+    <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+        <head>
+            <css src="css/myStyle.css" />
+        </head>
+    </page>
+    
+```
