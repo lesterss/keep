@@ -26,8 +26,7 @@ php bin/magento indexer:reindex
 ```bash
 php bin\magento indexer:reindex indexer_name.
 ```
-### Кеш
-(#anchors-in-markdown)
+### Кеш(#anchors-in-markdown)
 Очистка всего
 ```bash
 php bin/magento cache:clean
