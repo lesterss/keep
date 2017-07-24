@@ -257,3 +257,11 @@ app/design/frontend/Singree/walkbeyond/
 _variables  ---- Если переменные являются общими для тем они должны быть расположены в глобальной библиотеке в файле _variables.less
 
 _theme  ----- Если переменные являются общими для модулей.
+
+### Моды работы мадженто
+
+> bin/magento deploy:mode:set developer
+
+> bin/magento deploy:mode:set production
+
+> bin/magento deploy:mode:set default   - если никакой другой не установлен
