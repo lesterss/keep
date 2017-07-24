@@ -284,7 +284,11 @@ magento module:enable [-c|--clear-static-content] [-f|--force] [--all] <module-l
    - --all -> Для включения или отключения всех модулей одновременно.
    -  -f|--force -> Чтобы включить или отключить модуль, несмотря на зависимости.
    - -c|--clear-static-content -> Удаляет статик файлы.
+   
+magento info:adminuri   ---> Узнать админ урл(Который в etc/env.php)
+magento setup:config:set [--<parameter>=<value>]   --> Для изменения параметра. (Не только адмир урл а всего конфига)
 ```
+
 ### Режим обслуживание (красная подсветка)
 
 Если есть этот файл var/.maintenance.flag значит режим вкл.
