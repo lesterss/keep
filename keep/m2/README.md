@@ -1,7 +1,7 @@
-#Шпаргалка команд Magento2
+# Шпаргалка команд Magento2
+* [create an anchor](#anchors-in-markdown)
 
-
-###Реиндекс
+### Реиндекс
 Список всех возможных реиндексов 
 ``` bash
 php bin/magento indexer:info
@@ -26,10 +26,10 @@ php bin/magento indexer:reindex
 ```bash
 php bin\magento indexer:reindex indexer_name.
 ```
-###Кеш
-
+### Кеш
 
 Очистка всего
 ```bash
 php bin/magento cache:clean
 ```
+### Стили
