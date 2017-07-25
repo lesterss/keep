@@ -74,6 +74,9 @@ grunt watch
  @screen__xl: 1440px;
 ```
 ## Добавить контейнер в xml layout
+Все лаяуты расшираются с конца, не перезаписывая родительский
+
+<block -- > ниже это пример блока который не требует доп.функций и предназначен для статик контента.Если нужна привязка к другим блокам юзаем схему как в мадженте 1.
 
 ```xml
 <container name="header.menu.wrapper" htmlClass="menu-wrapper" htmlTag="div" after="header.panel.wrapper2"><!-- parent container -->
@@ -82,6 +85,47 @@ grunt watch
 	</container>
 </container> <!-- end of parent container -->
 ```
+или
+
+```xml
+<container name="checkout.cart.container" htmlTag="div" htmlId="cart-container-id" htmlClass="cart-container" before="-">
+</container>
+```
+в итоге получим
+
+```html
+<div class=”cart-container” id=”cart-container-id”></div>
+```
+
+**Синтаксис атрибута template**
+
+> Magento_Checkout::html/breadcrumbs.phtml
+
+Это сокращенный синтаксис для ссылки на каталог шаблонов в определенном модуле (в данном случае Magento_Checkout). 
+Он вызывает breadcrumbs Phtml-файл по пути : app / design / frontend /// Magento_Checkout / templates / breadcrumbs.phtml
+
+Если редактируемый XML-файл макета уже находится в том же модуле, что и шаблон, который вы вызываете, вы можете пропустить определение модуля.
+
+> template="breadcrumbs.phtml"
+
+**Блок в другом блоке или контейнере**
+
+Если вы хотите разместить блок в другом блоке или контейнере, вы можете определить это в определении родительского блока или контейнера или вы можете использовать методы «referenceBlock» или «referenceContainer».
+
+```xml
+<referenceContainer name="main.content">
+ <block class="Magento\Framework\View\Element\Template" name="product-recommended-list" template="Magento_Catalog::product/list/product-recommendedlist.phtml"/>
+</referenceContainer>
+```
+
+## Перемещение блоков / контейнеров 
+
+Если в контейнере есть блоки и тд, все они будут тоже перемещены с сохранением порядка parent / child 
+
+```xml
+<move element="name.of.container.or.block" destination="name.of.destination.block.or.container" />
+```
+
 ## Выбор в базе core.config base url
 
 ```sql
