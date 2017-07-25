@@ -1,5 +1,6 @@
 # Полезные линки
 
+[Блог конторы, есть хорошие статьи по м2](https://inviqa.com/blog)
 
 [Дока аланашторма](http://alanstorm.com/category/magento-2/)
 
