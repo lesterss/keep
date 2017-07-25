@@ -1,5 +1,7 @@
 # Полезные линки
 
+[Структура папок мадженты и создание модуля](https://inviqa.com/blog/magento-2-tutorial-how-to-create-command-line-module)
+
 [Блог конторы, есть хорошие статьи по м2](https://inviqa.com/blog)
 
 [Дока аланашторма](http://alanstorm.com/category/magento-2/)
