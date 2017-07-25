@@ -253,6 +253,30 @@ app/design/frontend/Singree/walkbeyond/
 
 **Эти строки могут быть подключены только в файлы в <theme-dir>/web/css**
 
+### Права на папки/файлы
+[Здесь подробнее](https://magento.stackexchange.com/questions/91870/magento-2-folder-file-permissions)
+`
+cd <your Magento install dir> 
+
+find . -type f -exec chmod 644 {} \;                        // 644 permission for files
+
+find . -type d -exec chmod 755 {} \;                        // 755 permission for directory 
+
+find ./var -type d -exec chmod 777 {} \;                // 777 permission for var folder    
+
+find ./pub/media -type d -exec chmod 777 {} \;
+
+find ./pub/static -type d -exec chmod 777 {} \;
+
+chmod 777 ./app/etc
+
+chmod 644 ./app/etc/*.xml
+
+chown -R :<web server group> .
+
+chmod u+x bin/magento
+`
+
 #### Логотип
 
 > Если Ваш логотип в другом формате, необходимо его объявить:
