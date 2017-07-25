@@ -110,6 +110,11 @@
 * setup:performance:generate-fixtures Generates fixtures
 * setup:rollbackRolls back Magento Application codebase, media and database
 * setup:static-content:deploy Deploys static view files
+  - [Здесь больше](http://devdocs.magento.com/guides/v2.1/config-guide/cli/config-cli-subcommands-static-view.html)
+  - php bin/magento setup:static-content:deploy en_US      ---> Для конкретного языка
+  - php bin/magento setup:static-content:deploy --theme Magento/luma --theme Magento/second_theme   ---> Для спец темы
+  - php bin/magento setup:static-content:deploy --theme="Magento/backend"    ---->Для бекенд темы
+  - php bin/magento setup:static-content:deploy en_US --exclude-theme Magento/luma --no-html-minify    -----> Исключить тему из статик контент деплоя и не минифицировать html
 * setup:store-config:set Installs the store configuration
 * setup:uninstall Uninstalls the Magento application
 * setup:upgrade Upgrades the Magento application, DB data, and schema
