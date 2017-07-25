@@ -45,6 +45,7 @@ php bin\magento indexer:reindex indexer_name.
 Команда полностью очистит хранилище кэша.
 php bin/magento cache:flush
 
+Удаляет кеш но только тот который включенн в админке в кеш менеджере
 php bin/magento cache:clean
 ```
 ### Стили
