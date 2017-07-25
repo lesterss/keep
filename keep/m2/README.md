@@ -40,6 +40,11 @@ php bin\magento indexer:reindex indexer_name.
 
 > System — Cache Management
 
+Статус кеша
+```bash
+php bin/magento cache:status
+```
+
 Очистка всего
 ```bash
 Команда полностью очистит хранилище кэша.
