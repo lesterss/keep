@@ -1,5 +1,9 @@
 # Заметки по Мадженте 1
 
+### Линки
+
+[Гайд по созданию темы респонсив](http://devdocs.magento.com/guides/m1x/ce19-ee114/RWD_dev-guide.html)
+[Responsive Email](http://devdocs.magento.com/guides/m1x/ce19-ee114/RWD_responsive_emails.html)
 
 **Пути к своей теме.**
 
@@ -162,3 +166,27 @@ local.xml - начало
 ```
 
 Мы ссылаемся на блок content и с помощью тега after указываем, что блок будет вызываться в самом конце основного контента (content).
+
+### Добавление статик блока
+
+Сначала в админке в  "cms/static block" его нужно создать он будет со своим уникальным "Identifier"
+```xml
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <cms_index_index>
+        <reference name="content">
+            <block type="cms/block" name="home.static.block" after="-">
+                <action method="setBlockId"><block_id>home_static_block</block_id></action>
+            </block>
+        </reference>
+    </cms_index_index>
+</layout>
+```
+Этот "Identifier" нужно вписать в тег \<block_id\>
+
+
+## Template -  шаблон
+
+Шаблон - app/design/frontend/<имя_пакета>/<имя_темы>/template/ 
+
+Локализация -app/design/frontend/<имя_пакета>/<имя_темы>/locale/
