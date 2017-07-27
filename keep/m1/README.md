@@ -8,6 +8,8 @@
 
 [Оптимизация загрузки страниц M1](http://freaksidea.com/show-78-optimizatsiya-zagruzki-stranitsy-v-magento-1x)
 
+[Модуль который показывает action method для разработчиков](https://www.magentocommerce.com/magento-connect/developer-manual.html)
+
 **Пути к своей теме.**
 
 app/design/frontend/<package_name>/<theme_name>/
@@ -345,5 +347,66 @@ handle ниже это "default" и "print"
 
 > **Action** может находится только в reference или block, так как эта директива означает вызов метода из класса блока. Например, блок head имеет методы addJs, addCss, addItem с помощью которых можно добавить на страницу файлы javascript (из директории js обычно) и css (из директории текущего скина).
 
-> Метод **addItem** универсальный, с его помощью можно добавить javascript (как из корневого каталога, так и с каталога скина) и css
+> Метод **addItem** универсальный, с его помощью можно добавить javascript (как из корневого каталога, так и с каталога скина) и css.
+
+
 # Структурные Блоки
+
+Стандартные блоки:
+
+* HEADER
+* LEFT
+* RIGHT
+* CONTENT
+* FOOTER
+
+блок newreference -- его мы добавим сами перед FOOTER.
+```xml
+**Стандартные  блоки дефолтной темы**
+
+<block type="core/text_list" name="left" as="left"/>
+<block type="core/text_list" name="content" as="content"/>
+<block type="core/text_list" name="right" as="right"/>
+
+**Так добавим наш блок**
+
+<block type="core/text_list" name="newreference" as="newreference"/>
+```
+
+Но пока мадженто не знает куда его поместить.
+Допустим мы хотим его добавить для страниц с правой колонкой. Находим 2columns-right.phtml открываем и добавляем его.
+```html
+<div class="main-container col2-right-layout">
+            <div class="main">
+                <?php echo $this->getChildHtml('breadcrumbs') ?>
+                <div class="col-main">
+                    <?php echo $this->getChildHtml('global_messages') ?>
+                    <?php echo $this->getChildHtml('content') ?>
+                </div>
+                <div class="col-right sidebar"><?php echo $this->getChildHtml('right') ?></div>
+            </div>
+            <div><?php echo $this->getChildHtml('newreference') ?></div>
+        </div>
+```
+Но пока он ничего не выводит.
+
+Создаем файл в app/design/frontend/[наш_пакет]/[default]/template/newreference.phtml
+
+И В local.xml (как мы уже знаем в нем нужно делать мелкие правки) добавляем ниже код (только в нужную директиву):
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+	<default>
+		<reference name="root">
+			<block type="core/text_list" name="newreference" as="newreference" translate="label">
+				<label>New Reference</label>
+			</block>
+		</reference>
+		<reference name="newreference">
+			<block type="core/template" name="newreferenceblock" template="newreference.phtml" />
+		</reference>
+	</default>
+</layout>
+```
+
+Теперь уже блок будет выводится на сайте перед футером.
