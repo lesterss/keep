@@ -46,3 +46,84 @@ skin/frontend/Mypackage/store2/
 ## Основное правило темы в пакете в том, что они должны быть схожими, иначе они должны быть разделены на разные пакеты.
 
 > Тема default должны быть основой сайта, а дополнительные темы должны просто дополнять эту основу. Если вы радикально меняете каждый элемент  сайта в теме, то это может быть основанием для разделения на пакеты.
+
+
+## Макет -  layout
+
+>  Здесь лежат xml модулей или вида, любого что может влияет на фронт часть сайта.
+
+Например, модуль Magento app/code/core/Mage/Page/ имеет свой собственный XML файл app/design/frontend/base/default/layout/page.xml. **Но названия модуля и xml не всегда совпадают**
+
+> Посмотреть какой xml привязан к модулю можно здесь app/code/local/<область_имен>/<имя_модуля>/etc/config.xml
+
+Для не очень больших правок (создание блоков/ удаление, смена шаблона) существует local.xml (если надо создайте его), он как аналог functions.php для WordPress.
+
+Но для больших изменений лучше использовать соответствующий модулю xml.
+
+local.xml - начало
+
+```xml
+<?xml version="1.0"?>
+<!--
+/*
+ * Store Name
+ * Store URL
+ *
+ * @description  Layout modifications
+ * @author       Author Name
+ * @package      packagename_default
+ *
+ */
+-->
+<layout version="0.1.0">
+    <!-- our modifications will go here -->
+</layout>
+```
+Подключение блоков и прочего в xml можно делать 2 способами:
+
+* Дескриптор <default> - это глобальный дескриптор, заденет все сттраницы.
+
+* Дескриптор <cms_index_index> - это пример дескриптора, только для главной страницы (на самом деле их много).
+
+**ПРИМЕР РАБОЧЕГО LOCAL.XML**
+
+```xml
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <!-- jQuery locally -->
+            <action method="addItem"><type>skin_js</type><name>js/libs/jquery.min.js</name></action>
+ 
+            <!-- jQuery CDN -->
+            <block type="core/text" name="cdn.jquery">
+                <action method="setText">
+                    <text>
+                        <![CDATA[
+                        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                        <script type="text/javascript">jQuery.noConflict();</script>
+                        ]]>
+                    </text>
+                </action>
+            </block>
+ 
+            <!-- add some items (globally) -->
+            <action method="addItem"><type>skin_js</type><name>js/libs/modernizr.min.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/libs/html5shiv.min.js</name><params/><if>lt IE 9</if></action>
+ 
+            <!-- remove some items (globally) -->
+            <action method="removeItem"><type>skin_css</type><name>css/widgets.css</name></action></action>
+            <action method="removeItem"><type>skin_js</type><name>js/ie6.js</name><if>lt IE 7</if></action>
+            <action method="removeItem"><type>js</type><name>lib/ds-sleight.js</name><params/><if>lt IE 7</if></action>
+        </reference>
+    </default>
+ 
+    <cms_index_index>
+        <reference name="head">
+            <!-- add items just on the homepage -->
+            <action method="addItem"><type>skin_js</type><name>js/libs/home.min.js</name></action>
+            <action method="addItem"><type>skin_css</type><name>css/home.css</name></action>
+        </reference>
+    </cms_index_index>
+</layout>
+```
