@@ -40,7 +40,6 @@ app/design/frontend/Mypackage/default/
 app/design/frontend/Mypackage/store2/
 
 просто сразу создаем тему в нашем пакете но только в скинах здесь
-
 skin/frontend/Mypackage/store2/
 ```
 
