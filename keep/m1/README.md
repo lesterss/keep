@@ -249,8 +249,23 @@ local.xml - начало
 * Наконец, мы должны добавить строку кода в наши файлы шаблона перед закрытием тега  \<body\>.
 
 **Вот пример файлов шаблона стандартных**
-* Вот пример файлов шаблона стандартных
+
  - 1column.phtml
  - 2columns-left.phtml
  - 2columns-right.phtml
  - 3columns.phtml
+
+Пример того как они должны выглядеть после добавления нашей строки:
+```html
+ ...
+        ...
+         
+        <?php echo $this->getAbsoluteFooter() ?>
+ 
+        <!-- adds ability to load js in the footer -->
+        <?php echo $this->getChildHtml('footer.js') ?>
+    </body>
+</html>
+```
+
+# Структурные Блоки
