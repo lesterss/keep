@@ -315,7 +315,8 @@ local.xml - начало
 </customer_account_edit>
 ```
 Все директивы из customer_account будут использованы и в customer_account_edit handle-е. Применяется для того, чтобы избежать дублирования одинаковых директив. 
-Директивы это:
+
+**Директивы это:**
 * \<customer_account_edit\>
 * \<defaul\>
 * \<remove\>
