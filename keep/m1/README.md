@@ -244,11 +244,7 @@ local.xml - начало
     </default>
 </layout>
 ```
- * Создаем свой собственый файл шаблона app/design/frontend/<имя_пакета>/default/page/html/footer-js.phtml с текстом 
+* Создаем свой собственый файл шаблона app/design/frontend/<имя_пакета>/default/page/html/footer-js.phtml с текстом 
  \<?php echo $this-\>getCssJsHtml() ?\>
- * Наконец, мы должны добавить строку кода в наши файлы шаблона перед закрытием тега  \<body\>.
-  - Вот пример файлов шаблона стандартных
-   - 1column.phtml
-   - 2columns-left.phtml
-   - 2columns-right.phtml
-   - 3columns.phtml
+* Наконец, мы должны добавить строку кода в наши файлы шаблона перед закрытием тега  \<body\>.
+ - Вот пример файлов шаблона стандартных
