@@ -4,6 +4,7 @@
 
 [Гайд по созданию темы респонсив](http://devdocs.magento.com/guides/m1x/ce19-ee114/RWD_dev-guide.html)
 [Responsive Email](http://devdocs.magento.com/guides/m1x/ce19-ee114/RWD_responsive_emails.html)
+[Оптимизация загрузки страниц M1](http://freaksidea.com/show-78-optimizatsiya-zagruzki-stranitsy-v-magento-1x)
 
 **Пути к своей теме.**
 
