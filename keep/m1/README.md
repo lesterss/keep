@@ -54,6 +54,8 @@ skin/frontend/Mypackage/store2/
 
 ## Макет -  layout
 
+[Здесь полная статья,вверху переключить на укр язык](https://code.tutsplus.com/articles/magento-theme-development-layout-files--cms-21037)
+
 >  Здесь лежат xml модулей или вида, любого что может влияет на фронт часть сайта.
 
 Например, модуль Magento app/code/core/Mage/Page/ имеет свой собственный XML файл app/design/frontend/base/default/layout/page.xml. **Но названия модуля и xml не всегда совпадают**
@@ -186,7 +188,67 @@ local.xml - начало
 
 
 ## Template -  шаблон
+[Здесь полная статья,вверху переключить на укр язык](https://code.tutsplus.com/uk/articles/magento-theme-development-template-files--cms-21040)
+Разбор будет на примере двух вопросов
+
+* Рекомендованые товары на главной.
+* И загрузка JavaScript в футере.
 
 Шаблон - app/design/frontend/<имя_пакета>/<имя_темы>/template/ 
 
 Локализация -app/design/frontend/<имя_пакета>/<имя_темы>/locale/
+
+Файлы шаблона могу генерировать как целый страницы 1column.phtml так и конкретные блоки header.phtml в рамках страницы.
+
+### Рекомендованые товары на главной.
+
+* Создаем подкатегорию от рутовой в catalog > manage categories, называем как то "Home products"
+ - Во вкладке "Category Products" отмечаем товары которые хотим добавить.
+ - Сохраняем.
+* Надо создать шаблон в котором напишем код, для этого хорошо подойдет шаблон из app/design/frontend/base/default/catalog/product/list.phtml  он очень похож на то, что нам надо сделать.
+ - Копируем себе в тему app/design/frontend/<имя_пакета>/default/catalog/product/list-home-featured.phtml
+ - Правим код как надо, пример кода по линке на полную статью выше.
+
+И дальше нам надо создать xml-блок, который будет подгружать шаблон, который мы создали. Это мы делаем в нашем файле local.xml, например так:
+
+```xml
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <cms_index_index>
+        <reference name="content">
+            <!-- home featured products -->
+            <block type="catalog/product_list" name="home.featured.products" after="-" template="catalog/product/list-home-featured.phtml" />
+        </reference>
+    </cms_index_index>
+</layout>
+```
+
+И все он будет теперь виден на главной.
+
+### JavaScript в футер
+
+Изменить вызов скрипта в футер через добавление его local.xml как в примере выше с каким-то параметром не выйдет, в мадженте нет такого спец параметра. 
+
+Нам необходимо создать xml-блок в нашем файле local.xmlи в ноде макета по умолчанию (default), например так:
+
+```xml
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="root">
+            <!-- adds ability to load js in the footer -->
+            <block type="page/html_head" name="footer.js" as="footer.js" template="page/html/footer-js.phtml">
+                <action method="addItem"><type>skin_js</type><name>js/build/jquery.min.js</name></action>
+            </block>
+        </reference>
+    </default>
+</layout>
+```
+ * Создаем свой собственый файл шаблона app/design/frontend/<имя_пакета>/default/page/html/footer-js.phtml с текстом 
+ \<?php echo $this-\>getCssJsHtml() ?\>
+ * Наконец, мы должны добавить строку кода в наши файлы шаблона перед закрытием тега  \<body\>.
+  - Вот пример файлов шаблона стандартных
+   - 1column.phtml
+   - 2columns-left.phtml
+   - 2columns-right.phtml
+   - 3columns.phtml
