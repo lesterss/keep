@@ -127,3 +127,38 @@ local.xml - начало
     </cms_index_index>
 </layout>
 ```
+### Удаление блоков 
+
+```xml
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <!-- remove a block -->
+        <remove name="right.permanent.callout" />
+     
+        <!-- unset a block -->
+        <reference name="right">
+            <action method="unsetChild"><name>right.poll</name></action>
+        </reference>
+    </default>
+</layout>
+```
+> <remove> -- удаляет блок полностью не зависимо от того, где он используется.
+
+> <unsetChild> --- этот метод будет удалять блок только всередине конкретного дескриптора макета.
+
+### Добавление структурного блока макета.
+
+Пример для главной страницы.
+```xml
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <cms_index_index>
+        <reference name="content">
+            <block type="core/template" name="home.additional" after="-" template="/home/additional.phtml" />
+        </reference>
+    </cms_index_index>
+</layout>
+```
+
+Мы ссылаемся на блок content и с помощью тега after указываем, что блок будет вызываться в самом конце основного контента (content).
