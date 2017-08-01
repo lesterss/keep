@@ -12,5 +12,6 @@
 [ВСТРОЕННЫЕ ТЕСТЫ М2](https://astrio.ru/blog/magento-2-dev-testing/)
 
 [УСКОРЕНИЕ LESS-КОМПИЛЯЦИИ В MAGENTO 2](https://astrio.ru/blog/magento2-frontend-speedup/)
+[Свои медиа брекпоинтс или перезапись responsive.less](http://devdocs.magento.com/guides/v2.0/frontend-dev-guide/responsive-web-design/rwd-breakpoints.html)
 
 [Есть пару статей полезных искать по всему сайту](http://www.emiprotechnologies.com/technical_notes/magento-technical-notes-60/post/add-custom-tab-on-customer-account-section-in-magento-2-317)
