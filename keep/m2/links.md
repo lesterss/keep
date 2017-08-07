@@ -1,6 +1,8 @@
 # Полезные линки
 
 
+[Как добавить шипинг метод модуль и много другого на сайте](https://magenticians.com/create-magento-2-shipping-module-method/)
+
 [Структура папок мадженты и создание модуля](https://inviqa.com/blog/magento-2-tutorial-how-to-create-command-line-module)
 
 [Блог конторы, есть хорошие статьи по м2](https://inviqa.com/blog)
