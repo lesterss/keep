@@ -132,3 +132,9 @@ grunt watch
 SELECT path,VALUE FROM core_config_data WHERE path LIKE 'web/secure/base%';
 SELECT path,VALUE FROM core_config_data WHERE path LIKE 'web/unsecure/base%';
 ```
+
+## Добавить нового админа
+
+```sql
+php bin/magento admin:user:create --admin-user='new-admin' --admin-password='!admin123!' --admin-email='info@domain.com' --admin-firstname='Jon' --admin-lastname='Doe'
+```
