@@ -148,7 +148,7 @@ find ./var -type d -exec chmod 777 {} \;                // 777 permission for va
 find ./pub/media -type d -exec chmod 777 {} \;
 find ./pub/static -type d -exec chmod 777 {} \;
 chmod 777 ./app/etc
-chmod 644 ./app/etc/*.xml
+chmod 644 ./app/etc/\*.xml
 chown -R :<web server group> .
 chmod u+x bin/magento
 ```
