@@ -138,3 +138,17 @@ SELECT path,VALUE FROM core_config_data WHERE path LIKE 'web/unsecure/base%';
 ```sql
 php bin/magento admin:user:create --admin-user='new-admin' --admin-password='!admin123!' --admin-email='info@domain.com' --admin-firstname='Jon' --admin-lastname='Doe'
 ```
+## Права на папки в М2
+
+```php
+cd <your Magento install dir> 
+find . -type f -exec chmod 644 {} \;                        // 644 permission for files
+find . -type d -exec chmod 755 {} \;                        // 755 permission for directory 
+find ./var -type d -exec chmod 777 {} \;                // 777 permission for var folder    
+find ./pub/media -type d -exec chmod 777 {} \;
+find ./pub/static -type d -exec chmod 777 {} \;
+chmod 777 ./app/etc
+chmod 644 ./app/etc/*.xml
+chown -R :<web server group> .
+chmod u+x bin/magento
+```
