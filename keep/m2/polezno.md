@@ -2,6 +2,10 @@
 ```php 
 https://github.com/subodha/magento-2-gulp  --- лучше
 https://github.com/subodha/magento-2-gulp  ---- тоже вариант но не заработал
+
+#Покажет более полное описание ошибки
+grunt --verbose имя таска
+
 ```
 ## Нет иконок и нет реакции в админке
 
