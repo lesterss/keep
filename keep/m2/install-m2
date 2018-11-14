@@ -1,6 +1,6 @@
 Раскоментить все конфиги;
 ``` bash
-composer install;
+php composer install;
 npm i
 npm up
 
