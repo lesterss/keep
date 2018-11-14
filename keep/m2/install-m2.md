@@ -2,9 +2,10 @@
 
 ``` html
 
-php composer install;
+composer install;
 npm i
 npm up
+
 bin/magento setup:install  
 --db-host="localhost"  
 --db-name="magento2"  
