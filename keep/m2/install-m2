@@ -1,10 +1,10 @@
 Раскоментить все конфиги;
-``` bash
+
+``` html
+
 php composer install;
 npm i
 npm up
-
-
 bin/magento setup:install  
 --db-host="localhost"  
 --db-name="magento2"  
@@ -16,4 +16,5 @@ bin/magento setup:install
 --admin-email="test@test.com"  
 --admin-firstname="Name"  
 --admin-lastname="Lastname"
+
 ```
