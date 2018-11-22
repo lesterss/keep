@@ -357,3 +357,4 @@ git remote add origin git@github.com:address.git # добавляем удале
 ```bash
 git update-index --assume-unchanged app/etc/config.php 
 ```
+https://habr.com/sandbox/112968/
