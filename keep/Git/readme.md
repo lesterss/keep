@@ -351,3 +351,9 @@ git remote add origin git@github.com:address.git # добавляем удале
 git remote rm origin # удаляем привязанный удалённый репозиторий
 git remote add origin git@github.com:address.git # добавляем удаленный репозиторий, сокр. имя — origin
 ```
+
+### Отмена слежения за файлом, который уже ранее был отслеживаемым и гитигнор не помогает
+
+```bash
+git update-index --assume-unchanged app/etc/config.php 
+```
