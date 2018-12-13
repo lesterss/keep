@@ -358,3 +358,5 @@ git remote add origin git@github.com:address.git # добавляем удале
 git update-index --assume-unchanged app/etc/config.php 
 ```
 https://habr.com/sandbox/112968/
+
+![Иллюстрация к гиту](https://github.com/lesterss/keep/blob/master/keep/Git/git.jpg)
