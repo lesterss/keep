@@ -18,3 +18,5 @@
 [Свои медиа брекпоинтс или перезапись responsive.less](http://devdocs.magento.com/guides/v2.0/frontend-dev-guide/responsive-web-design/rwd-breakpoints.html)
 
 [Есть пару статей полезных искать по всему сайту](http://www.emiprotechnologies.com/technical_notes/magento-technical-notes-60/post/add-custom-tab-on-customer-account-section-in-magento-2-317)
+
+[Обьяснение что такое  provider and displayArea в xml](https://magento.stackexchange.com/questions/120964/what-does-displayarea-and-provider-of-checkout-index-index-xml-mean-in-magen)
