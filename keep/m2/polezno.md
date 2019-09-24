@@ -162,6 +162,6 @@ chown -R :<web server group> .
 chmod u+x bin/magento
 ```
 
-##CSS critical path
+## CSS critical path
 
 Для загрузки какого то минимума стилей, пока грузится общая страница
